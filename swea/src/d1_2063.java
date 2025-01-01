@@ -9,7 +9,7 @@ public class d1_2063 {
         for (int i = 0; i < N; i++) {
             nums[i] = sc.nextInt();
         }
-        Arrays.sort(nums);
+        Arrays.sort(nums); //핵심
         System.out.println(nums[middle]);
     }
 }
