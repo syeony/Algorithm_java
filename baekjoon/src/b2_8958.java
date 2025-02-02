@@ -18,6 +18,7 @@ public class b2_8958 {
                     // System.out.println(j+" "+cnt);
                 }
                 else{
+                    cnt=0;
                 }
             }
 
