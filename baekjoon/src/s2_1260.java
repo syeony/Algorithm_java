@@ -1,10 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class s2_1260 {
     private static ArrayList<Integer>[] list;
@@ -41,8 +38,9 @@ public class s2_1260 {
         }
 
         for(int i=1;i<n+1;i++){
-            list[i].sort(null); //sort()함수엔 무조건 null을 넣어야함. 그럼 오름차순 기본.
+//            list[i].sort(null); //sort()함수엔 무조건 null을 넣어야함. 그럼 오름차순 기본.
             //만약 내림차순 하고싶으면 list.sort(Comparator.reverseOrder());
+            Collections.sort(list[i]);
         }
 
         dfs(v);
