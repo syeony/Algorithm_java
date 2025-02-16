@@ -30,7 +30,7 @@ public class s3_15655 {
         System.out.println(sb);
     }
 
-    static void dfs(int depth, int start){
+    static void dfs(int depth, int start){ //start가 있는 이유는 출력되는 한 줄의 수열이 오름차순 !
         if(depth>=m){
             for(int a:answer){
                 sb.append(a).append(" ");
