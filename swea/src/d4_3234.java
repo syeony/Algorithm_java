@@ -22,10 +22,11 @@ public class d4_3234 {
                 visited[i]=false;
             }
         }
+
     }
 
     public static void check(int depth, int left, int right) {
-        if(left<right) {
+        if(left<right) {//가지치기
             return;
         }
 
