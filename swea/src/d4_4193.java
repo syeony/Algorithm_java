@@ -2,101 +2,91 @@ import java.io.*;
 import java.util.*;
 
 public class d4_4193 {
-    static int n, time, answer;
+    static int n;
     static int[][] arr;
     static int[][] v;
-    static int sx,sy,ex,ey;
-    static int[] dx= {1,-1,0,0};
-    static int[] dy= {0,0,1,-1};
+    static int sx, sy, ex, ey;
+    static int[] dx = {1, -1, 0, 0};
+    static int[] dy = {0, 0, 1, -1};
 
-    public static void main(String[] args) throws Exception{
+    static class State {
+        int x, y, t;
+        public State(int x, int y, int t) {
+            this.x = x;
+            this.y = y;
+            this.t = t; //시간
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
 
-        int t=Integer.parseInt(br.readLine());
-        for(int tc=1;tc<=t;tc++) {
-            time=0;
-            answer=Integer.MAX_VALUE;
-            n=Integer.parseInt(br.readLine());
-            arr=new int[n][n];
-            v=new int[n][n];
-            for(int i=0;i<n;i++) {
-                st=new StringTokenizer(br.readLine());
-                for(int j=0;j<n;j++) {
-                    arr[i][j]=Integer.parseInt(st.nextToken());
-                    v[i][j]=-1;
+        int t = Integer.parseInt(br.readLine());
+        for (int tc = 1; tc <= t; tc++) {
+            n = Integer.parseInt(br.readLine());
+            arr = new int[n][n];
+            v = new int[n][n];
+            for (int i = 0; i < n; i++) {
+                st = new StringTokenizer(br.readLine());
+                for (int j = 0; j < n; j++) {
+                    arr[i][j] = Integer.parseInt(st.nextToken());
+                    v[i][j] = Integer.MAX_VALUE;
                 }
             }
+            st = new StringTokenizer(br.readLine());
+            sx = Integer.parseInt(st.nextToken());
+            sy = Integer.parseInt(st.nextToken());
+            st = new StringTokenizer(br.readLine());
+            ex = Integer.parseInt(st.nextToken());
+            ey = Integer.parseInt(st.nextToken());
 
-            st=new StringTokenizer(br.readLine());
-            sx=Integer.parseInt(st.nextToken());
-            sy=Integer.parseInt(st.nextToken());
-            st=new StringTokenizer(br.readLine());
-            ex=Integer.parseInt(st.nextToken());
-            ey=Integer.parseInt(st.nextToken());
-
-//			arr[sx][sy]=1;
-            v[sx][sy]=0;
-            bfs(sx,sy);
-            System.out.println("#"+tc+" "+answer);
+            int answer = bfs(sx, sy);
+            if(answer == Integer.MAX_VALUE) answer = -1;
+            System.out.println("#" + tc + " " + answer);
         }
-
     }
 
-    static int bfs(int x,int y) {
-        Queue<int[]> q=new LinkedList<>();
-        q.add(new int[] {x,y});
+    static int bfs(int X, int Y) {
+        PriorityQueue<State> pq = new PriorityQueue<>(Comparator.comparingInt(s -> s.t));
+        v[X][Y] = 0;
+        pq.add(new State(X, Y, 0));
 
-        while(!q.isEmpty()) {
-            int[] curr = q.poll();
-            x=curr[0];
-            y=curr[1];
-            if(x==ex && y==ey) {
-                answer=Math.min(answer, v[ex][ey]);
-                return answer;
-            }
-            time+=1;
+        while(!pq.isEmpty()){
+            State cur = pq.poll();
+            int x = cur.x;
+            int y = cur.y;
+            int curT = cur.t;
 
-            for(int i=0;i<4;i++) {
-                int nx=x+dx[i];
-                int ny=y+dy[i];
+            if(curT > v[x][y]) continue; // 가지치기
 
-                if(nx<0 || ny<0 || nx>=n || ny>=n) {
-                    continue;
-                }
-                if(arr[nx][ny]==1) {
-                    continue;
-                }
-                if(v[nx][ny]!=-1) continue;
-                if(arr[nx][ny]==2) {
-                    if(time%3==0) {
-                        v[nx][ny]=v[x][y]+4;
+            if(x == ex && y == ey) return curT;
 
-                        q.add(new int[] {nx,ny});
-                        continue;
+            for(int i = 0; i < 4; i++){
+                int nx = x + dx[i];
+                int ny = y + dy[i];
 
-                    }else if(time%3==1) {
-                        v[nx][ny]=v[x][y]+3;
+                if(nx < 0 || ny < 0 || nx >= n || ny >= n) continue;
 
-                        q.add(new int[] {nx,ny});
-                        continue;
+                if(arr[nx][ny] == 1) continue;
 
-                    }else if(time%3==2) {
-                        v[nx][ny]=v[x][y]+1;
-
-                        q.add(new int[] {nx,ny});
-                        continue;
-                    }
-                }
-                if(arr[nx][ny]==0) {
-                    v[nx][ny]=v[x][y]+1;
-
-                    q.add(new int[] {nx,ny});
+                int newT = 0;
+                if(arr[nx][ny] == 0) { // 바다면 1초
+                    newT = curT + 1;
+                } else if(arr[nx][ny] == 2) { // 소용돌이면
+                    // 현재 시각 curT에서 출발 시 소용돌이가 잠잠한 시점은 curT % 3 == 2이어야 함
+                    int mod = curT % 3;
+                    if(mod == 2) newT = curT + 1;       // 바로 이동
+                    else if(mod == 1) newT = curT + 2;    // 1초 대기
+                    else if(mod == 0) newT = curT + 3;    // 2초 대기
                 }
 
+                if(newT < v[nx][ny]) {
+                    v[nx][ny] = newT;
+                    pq.add(new State(nx, ny, newT));
+                }
             }
         }
-        return -1;
+        return Integer.MAX_VALUE;
     }
-
 }
