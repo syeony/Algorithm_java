@@ -47,22 +47,21 @@ public class d4_4193 {
         }
     }
 
-    static int bfs(int X, int Y) {
-        PriorityQueue<State> pq = new PriorityQueue<>(Comparator.comparingInt(s -> s.t));
-        v[X][Y] = 0;
-        pq.add(new State(X, Y, 0));
+    static int bfs(int startX, int startY) {
+        Queue<State> q = new LinkedList<>();
+        v[startX][startY] = 0;
+        q.add(new State(startX, startY, 0));
 
-        while(!pq.isEmpty()){
-            State cur = pq.poll();
+        while (!q.isEmpty()) {
+            State cur = q.poll();
             int x = cur.x;
             int y = cur.y;
             int curT = cur.t;
 
-            if(curT > v[x][y]) continue; // 가지치기
+            // 현재 시간이 이미 기록된 최단시간보다 크다면 스킵
+            if(curT > v[x][y]) continue;
 
-            if(x == ex && y == ey) return curT;
-
-            for(int i = 0; i < 4; i++){
+            for (int i = 0; i < 4; i++) {
                 int nx = x + dx[i];
                 int ny = y + dy[i];
 
@@ -71,22 +70,27 @@ public class d4_4193 {
                 if(arr[nx][ny] == 1) continue;
 
                 int newT = 0;
-                if(arr[nx][ny] == 0) { // 바다면 1초
+                if(arr[nx][ny] == 0) {
                     newT = curT + 1;
-                } else if(arr[nx][ny] == 2) { // 소용돌이면
-                    // 현재 시각 curT에서 출발 시 소용돌이가 잠잠한 시점은 curT % 3 == 2이어야 함
+                } else if(arr[nx][ny] == 2) { // 소용돌이
                     int mod = curT % 3;
-                    if(mod == 2) newT = curT + 1;       // 바로 이동
-                    else if(mod == 1) newT = curT + 2;    // 1초 대기
-                    else if(mod == 0) newT = curT + 3;    // 2초 대기
+                    if(mod == 2) {       // 바로 이동 가능
+                        newT = curT + 1;
+                    } else if(mod == 1) { // 1초 대기
+                        newT = curT + 2;
+                    } else if(mod == 0) { // 2초 대기
+                        newT = curT + 3;
+                    }
                 }
 
+                // 새로운 시간이 기존 기록보다 작으면 갱신하고 Queue에 추가
                 if(newT < v[nx][ny]) {
                     v[nx][ny] = newT;
-                    pq.add(new State(nx, ny, newT));
+                    q.add(new State(nx, ny, newT));
                 }
             }
         }
-        return Integer.MAX_VALUE;
+        return v[ex][ey];
     }
+
 }
