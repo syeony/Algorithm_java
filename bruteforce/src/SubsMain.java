@@ -19,7 +19,7 @@ public class SubsMain {
         //v[cnt]=true;
         subs(cnt+1,str+a[cnt]);
         //v[cnt]=false;
-        subs(cnt+1,str+"_");
+        subs(cnt+1,str);
     }
     public static void main(String[] args) throws Exception{
         C=0;

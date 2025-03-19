@@ -3,7 +3,7 @@ import java.util.*;
 
 //조합 4C3=4!/(4-3)!3!=4!/1!3!=4
 public class CombMain {
-    static int N=4, R=2, C=0;
+    static int N=4, R=3, C=0;
     static int[] a={1,2,3,4}, b=new int[R];
     //static boolean[] v=new boolean[N];//
 
@@ -15,8 +15,8 @@ public class CombMain {
         }
         for(int i=start; i<N; i++){
             b[cnt]=a[i];
-            comb(cnt+1,i+1);
-//            comb(cnt+1,i);
+//            comb(cnt+1,i+1);
+            comb(cnt+1,i);
         }
     }
     public static void main(String[] args) throws Exception{
