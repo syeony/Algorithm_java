@@ -23,6 +23,7 @@ public class g4_4485 {
         }
     }
 
+    public static void main(String[] args) throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
         int idx=0;
