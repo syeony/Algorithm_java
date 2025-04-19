@@ -97,12 +97,17 @@ public class g3_17471 {
         Queue<Integer> q=new LinkedList<>();
         q.offer(group.get(0));
 
+        boolean[] isInGroup = new boolean[n + 1]; //해당 그룹내것만 방문처리해야함
+        for (int i : group) {
+            isInGroup[i] = true;
+        }
+
         while(!q.isEmpty()){
             int c=q.poll();
-
             visited[c]=true;
+
             for(int i:connect[c]){
-                if(!visited[i]){
+                if(!visited[i] && isInGroup[i]){ //해당 그룹내것만 방문처리해야함
                     visited[i]=true;
                     q.offer(i);
                 }
