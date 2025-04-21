@@ -15,7 +15,7 @@ public class PermMain {
         }
         for(int i=0; i<N; i++){
             if(!v[i]) {
-                v[i]=true;//
+                v[i]=true;//visited빼면 중복순열
                 b[cnt]=a[i];
                 perm(cnt+1);
                 v[i]=false;//

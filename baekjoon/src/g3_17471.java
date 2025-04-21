@@ -99,10 +99,10 @@ public class g3_17471 {
 
         while(!q.isEmpty()){
             int c=q.poll();
-
             visited[c]=true;
+
             for(int i:connect[c]){
-                if(!visited[i]){
+                if(!visited[i] && group.contains(i)){
                     visited[i]=true;
                     q.offer(i);
                 }

@@ -7,7 +7,6 @@ public class a_5656_2 {
     static int n,w,h;
     static int[][] map;
     static List<Integer> perm;
-    static int[] width;
     static int[] dx={0,0,1,-1};
     static int[] dy={1,-1,0,0};
     static int answer;
@@ -31,11 +30,6 @@ public class a_5656_2 {
                 }
             }
 
-            width=new int[w];
-            for(int i=0;i<w;i++){
-                width[i]=i;
-            }
-
             perm=new LinkedList<>();
             answer=Integer.MAX_VALUE;
             getPerm(0);
@@ -46,10 +40,9 @@ public class a_5656_2 {
     static void getPerm(int depth){
         if(depth==n){
 //            System.out.println(perm);
-            List<Integer> list=new ArrayList<>();
-            for(int i=0;i<perm.size();i++){
-                list.add(perm.get(i));
-            }
+
+            //copy를 해줘야 기존 순열에 영향이 가지 않음
+            List<Integer> list=copyList();
             int[][] map2=copyMap();
 
             while(list.size()>0){
@@ -63,10 +56,18 @@ public class a_5656_2 {
 
         for(int i=0;i<w;i++){
             //중복순열(배열로 할 수도 있지만 후처리를 위해 리스트로 선택)
-            perm.add(width[i]);
+            perm.add(i);
             getPerm(depth+1);
             perm.remove(perm.size()-1);
         }
+    }
+
+    static List<Integer> copyList(){
+        List<Integer> list=new ArrayList<>();
+        for(int i=0;i<perm.size();i++){
+            list.add(perm.get(i));
+        }
+        return list;
     }
 
     static int[][] copyMap(){

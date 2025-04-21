@@ -15,8 +15,8 @@ public class CombMain {
         }
         for(int i=start; i<N; i++){
             b[cnt]=a[i];
-//            comb(cnt+1,i+1);
-            comb(cnt+1,i);
+            comb(cnt+1,i+1); //조합
+//            comb(cnt+1,i); //중복조합
         }
     }
     public static void main(String[] args) throws Exception{
