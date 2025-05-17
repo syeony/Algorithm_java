@@ -75,9 +75,12 @@ public class g5_5430 {
 				sb.append("]");
 				System.out.println(sb.toString());
 //				if(reverse) {
-//					System.out.println(arr.reversed());
+//					ArrayList<Integer> temp = new ArrayList<>(arr);
+//					Collections.reverse(temp);
+//					System.out.println(temp);
 //				}else {
-//					System.out.println(arr);
+//					ArrayList<Integer> temp = new ArrayList<>(arr);
+//					System.out.println(temp);
 //				}
 			}
 		}
