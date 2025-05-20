@@ -26,7 +26,7 @@ public class d5_10507 {
                 // 총 구간 길이 = studyDays[right] - studyDays[left] + 1
                 // 실제 공부한 날 수 = right - left + 1
                 // 조작 필요한 날 수 = 전체 - 실제 = studyDays[right] - studyDays[left] + 1 - (right - left + 1)
-                // 정리하면: (studyDays[right] - studyDays[left]) - (right - left)
+                // 정리: (studyDays[right] - studyDays[left]) - (right - left)
                 while ((studyDays[right] - studyDays[left]) - (right - left) > p) {
                     left++;
                 }
