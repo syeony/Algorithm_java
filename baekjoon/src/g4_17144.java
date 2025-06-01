@@ -94,11 +94,11 @@ public class g4_17144 {
 
     static void second() {
         // 1. 윗쪽(반시계, mx1행)
-        // 위로
+        // 아래로
         for (int i = mx1 - 1; i > 0; i--) map[i][0][0] = map[i - 1][0][0];
         // 왼쪽
         for (int i = 0; i < c - 1; i++) map[0][i][0] = map[0][i + 1][0];
-        // 아래로
+        // 위로
         for (int i = 0; i < mx1; i++) map[i][c - 1][0] = map[i + 1][c - 1][0];
         // 오른쪽
         for (int i = c - 1; i > 1; i--) map[mx1][i][0] = map[mx1][i - 1][0];
@@ -106,11 +106,11 @@ public class g4_17144 {
         map[mx1][1][0] = 0;
 
         // 2. 아랫쪽(시계, mx2행)
-        // 아래로
+        // 위로
         for (int i = mx2 + 1; i < r - 1; i++) map[i][0][0] = map[i + 1][0][0];
         // 왼쪽
         for (int i = 0; i < c - 1; i++) map[r - 1][i][0] = map[r - 1][i + 1][0];
-        // 위로
+        // 아래로
         for (int i = r - 1; i > mx2; i--) map[i][c - 1][0] = map[i - 1][c - 1][0];
         // 오른쪽
         for (int i = c - 1; i > 1; i--) map[mx2][i][0] = map[mx2][i - 1][0];
