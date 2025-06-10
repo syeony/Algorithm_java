@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-class Solution {
+class 네트워크 {
     static boolean[] visited;
     static boolean flag;
     static int[][] computer;
