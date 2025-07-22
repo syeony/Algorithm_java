@@ -12,11 +12,6 @@ public class b2_14561 {
             long a=Long.parseLong(st.nextToken());
             int b=Integer.parseInt(st.nextToken());
 
-            if (b < 2 || b > 36) {
-                System.out.println(0);
-                continue;
-            }
-
             String c=Long.toString(a,b);
             String reverse_c=new StringBuilder(c).reverse().toString();
 
