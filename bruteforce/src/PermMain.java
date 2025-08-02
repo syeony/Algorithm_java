@@ -14,12 +14,12 @@ public class PermMain {
             return;
         }
         for(int i=0; i<N; i++){
-            if(!v[i]) {
-                v[i]=true;//visited빼면 중복순열
+//            if(!v[i]) {
+//                v[i]=true;//visited빼면 중복순열
                 b[cnt]=a[i];
                 perm(cnt+1);
-                v[i]=false;//
-            }
+//                v[i]=false;//
+//            }
         }
     }
     public static void main(String[] args) throws Exception{
